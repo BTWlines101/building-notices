@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>남현오피스텔 퇴실 안내</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css">
+  <style>
+    :root {
+      --red: #FF385C;
+      --red-dark: #D93248;
+      --red-soft: #fff8f6;
+      --red-border: #ffd0c4;
+      --text-1: #222222;
+      --text-2: #484848;
+      --text-3: #717171;
+      --border: #e8e8e8;
+      --bg: #f7f7f7;
+      --card: #ffffff;
+      --shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Pretendard Variable', -apple-system, sans-serif;
+      background: #ffffff;
+      background-image: radial-gradient(#d4d4d4 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: var(--text-1);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 460px;
+      margin: 0 auto;
+      padding: 0 0 60px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--red);
+      padding: 16px 20px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .header-inner { position: relative; z-index: 1; }
+
+    .header-badge { display: none; }
+
+    .header-top-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .header-icon-wrap {
+      width: 22px; height: 22px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .header-icon-wrap svg { width: 12px; height: 12px; stroke: #fff; }
+
+    .header-building-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .header-divider-dot {
+      width: 3px; height: 3px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+    }
+
+    .header-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.4px;
+    }
+
+    .header-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: -0.1px;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      padding: 20px 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 16px;
+      border: 1px solid rgba(232,232,232,0.9);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 28px rgba(0,0,0,0.12);
+    }
+
+    /* ── CARD HEADER ── */
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(to right, rgba(255,56,92,0.04), transparent);
+    }
+
+    .card-num {
+      width: 26px; height: 26px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-num span {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-1);
+      letter-spacing: -0.3px;
+      flex: 1;
+    }
+
+    .badge-required {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--red-dark);
+      background: var(--red-soft);
+      border: 1px solid var(--red-border);
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    /* ── CARD BODY ── */
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ── 강조 박스 (이사 종료 시간) ── */
+    .emphasis-box {
+      background: linear-gradient(135deg, var(--red-soft), #fff5f3);
+      border: 1px solid var(--red-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .emphasis-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .emphasis-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-1);
+      line-height: 1.5;
+      letter-spacing: -0.3px;
+    }
+
+    .emphasis-text .highlight-date {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 1px 8px;
+      border-radius: 4px;
+      margin: 0 2px;
+      vertical-align: middle;
+    }
+
+    /* ── 본문 텍스트 ── */
+    .body-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.7;
+      letter-spacing: -0.2px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    /* ── 경고/안내 배너 ── */
+    .alert {
+      border-radius: 10px;
+      padding: 11px 13px;
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+    }
+
+    .alert-warning {
+      background: var(--red-soft);
+      border: 1px solid var(--red-border);
+      border-left: 3px solid var(--red);
+    }
+
+    .alert-info {
+      background: #f7f5f2;
+      border: 1px solid #e0dbd4;
+      border-left: 3px solid #b8b0a6;
+    }
+
+    .alert svg {
+      width: 14px; height: 14px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .alert-warning svg { stroke: var(--red); }
+    .alert-info svg { stroke: #9e958a; }
+
+    .alert-text {
+      font-size: 12px;
+      color: var(--text-2);
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .alert-text strong { color: var(--text-1); font-weight: 600; }
+
+    /* ── 공과금 새 박스 ── */
+    .u-box {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.95);
+    }
+    .u-title {
+      padding: 9px 12px 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -0.3px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(250,250,250,0.9);
+    }
+    .u-rows { padding: 6px 8px; display: flex; flex-direction: column; gap: 2px; }
+    .u-row {
+      display: flex; align-items: center; gap: 6px;
+      padding: 5px 4px; border-radius: 6px; transition: background 0.12s;
+    }
+    .u-row:hover { background: rgba(0,0,0,0.04); }
+    .u-label { font-size: 10px; color: var(--text-3); min-width: 28px; flex-shrink: 0; }
+    .u-num {
+      font-size: 13px; font-weight: 700; color: var(--text-1);
+      font-variant-numeric: tabular-nums; letter-spacing: 0.2px; flex: 1;
+    }
+    .u-btns { display: flex; gap: 3px; flex-shrink: 0; }
+    .u-btn {
+      width: 26px; height: 26px;
+      border: 1px solid var(--border); border-radius: 6px;
+      background: #fff; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; text-decoration: none; transition: all 0.12s;
+    }
+    .u-btn:hover { background: var(--red-soft); border-color: var(--red-border); }
+    .u-btn svg { width: 12px; height: 12px; stroke: var(--text-2); fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
+    .u-btn:hover svg { stroke: var(--red); }
+    .u-footer {
+      padding: 6px 12px 8px; border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 3px;
+      background: rgba(250,250,250,0.8);
+    }
+    .u-info {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 10px; color: var(--text-3); line-height: 1.5; word-break: keep-all;
+    }
+    .u-info svg { width: 10px; height: 10px; stroke: var(--text-3); fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; flex-shrink: 0; }
+
+    /* ── 공과금 항목 ── */
+    .utility-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: #fafafa;
+      transition: background 0.15s;
+    }
+
+    .utility-item:hover { background: #f5f5f5; }
+
+    .utility-header-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .utility-category-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -0.3px;
+    }
+
+    .utility-provider {
+      font-size: 10px;
+      color: var(--text-3);
+    }
+
+    .utility-tel-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+
+    .utility-tel-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .utility-tel-number {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-1);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.2px;
+      flex: 1;
+    }
+
+    .utility-footer {
+      padding-top: 7px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .utility-footer-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      color: var(--text-3);
+    }
+
+    .utility-footer-row svg {
+      width: 10px; height: 10px;
+      stroke: var(--text-3);
+      flex-shrink: 0;
+    }
+
+    .utility-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-2);
+      letter-spacing: -0.1px;
+      margin-bottom: 4px;
+    }
+
+    .utility-category-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -0.3px;
+      margin-bottom: 2px;
+    }
+
+    .utility-provider {
+      font-size: 11px;
+      color: var(--text-3);
+      margin-bottom: 8px;
+    }
+
+    .utility-small-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 5px;
+    }
+
+    .utility-small-info span {
+      font-size: 10px;
+      color: var(--text-3);
+      letter-spacing: -0.1px;
+    }
+
+    .tel-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .tel-number {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: 0.3px;
+      font-variant-numeric: tabular-nums;
+      flex: 1;
+    }
+
+    .tel-actions { display: flex; gap: 4px; }
+
+    .tel-btn {
+      width: 28px; height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+
+    .tel-btn:hover {
+      background: var(--red-soft);
+      border-color: var(--red-border);
+    }
+
+    .tel-btn svg { width: 14px; height: 14px; stroke: var(--text-2); }
+    .tel-btn:hover svg { stroke: var(--red); }
+
+    .tel-hours {
+      font-size: 11px;
+      color: var(--text-3);
+      letter-spacing: -0.1px;
+    }
+
+    .meter-location {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      font-size: 11px;
+      color: var(--text-3);
+      background: rgba(0,0,0,0.03);
+      border-radius: 5px;
+      padding: 4px 6px;
+    }
+
+    .meter-location svg {
+      width: 11px; height: 11px;
+      stroke: var(--text-3);
+      flex-shrink: 0;
+    }
+
+    .tel-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 6px 0;
+    }
+
+    /* ── 불릿 리스트 ── */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .bullet-list li {
+      display: flex;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+    }
+
+    .bullet-list li::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--red);
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .bullet-list li.strong-item {
+      color: var(--text-1);
+      font-weight: 600;
+    }
+
+    .bullet-list li.strong-item::before {
+      background: var(--red-dark);
+      width: 6px; height: 6px;
+    }
+
+    /* ── 섹션 소제목 ── */
+    .sub-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sub-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── 반환 절차 스텝 ── */
+    .steps {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .step-box {
+      flex: 1;
+      background: var(--red-soft);
+      border: 1px solid var(--red-border);
+      border-radius: 10px;
+      padding: 8px 4px;
+      text-align: center;
+    }
+
+    .step-box.final {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .step-box .step-num {
+      font-size: 9px;
+      font-weight: 700;
+      color: rgba(255,56,92,0.6);
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .step-box.final .step-num { color: rgba(255,255,255,0.7); }
+
+    .step-box .step-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--red);
+      line-height: 1.3;
+    }
+
+    .step-box.final .step-label { color: #fff; }
+
+    .step-arrow {
+      color: var(--text-3);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ── 계좌 항목 ── */
+    .account-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fafafa;
+    }
+
+    .account-dot {
+      width: 7px; height: 7px;
+      background: var(--red);
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .account-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.5;
+      letter-spacing: -0.1px;
+    }
+
+    .account-text strong { color: var(--text-1); font-weight: 600; }
+
+    /* ── 구분선 ── */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 0;
+    }
+
+    /* ── 노트 텍스트 ── */
+    .note-text {
+      font-size: 11px;
+      color: var(--text-3);
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+    }
+
+    /* ── 푸터 ── */
+    .footer {
+      margin: 24px 16px 0;
+      padding: 16px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.8);
+      border-radius: 12px;
+    }
+
+    .footer-contact {
+      font-size: 12px;
+      color: var(--text-3);
+      margin-bottom: 4px;
+    }
+
+    .footer-brand {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: -0.3px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ─── 헤더 ─── -->
+    <header class="header">
+    <div class="header-inner">
+      <div class="header-top-row">
+        <div class="header-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <span class="header-building-name">남현오피스텔</span>
+        <div class="header-divider-dot"></div>
+        <span class="header-title">퇴실 안내</span>
+      </div>
+      <p class="header-sub">원활한 퇴실을 위해 아래 내용을 꼭 확인해 주세요.</p>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ─── Section 1 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>1</span></div>
+        <span class="card-title">이사 종료 시간 전달</span>
+        <span class="badge-required">필수</span>
+      </div>
+      <div class="card-body">
+
+        <div class="emphasis-box">
+          <div class="emphasis-text">
+            <span class="highlight-date">이사 종료 예정 시간</span>을
+            <span class="highlight-date">이사일 제외 7일 전까지</span>
+            임대인에게 전달해 주세요.
+          </div>
+        </div>
+
+        <p class="body-text">임대인도 당일 다른 일정이 있을 수 있어, 사전에 종료 예정 시간을 알려주셔야 예정 시간에 맞춰 방문이 가능합니다.</p>
+
+        <div class="alert alert-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="alert-text">
+            <strong>미전달 또는 지연 전달 시</strong> 당일 방문이 어려울 수 있으며, 룸체크가 지연되어 <strong>보증금 반환이 늦어질 수 있습니다.</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 2 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>2</span></div>
+        <span class="card-title">공과금 정산 안내</span>
+      </div>
+      <div class="card-body">
+
+        <p class="body-text">이사 당일 기준으로 정산 완료 후 납부내역 캡처해 임대인에게 전달해 주세요.</p>
+
+        <div class="u-box">
+          <div class="u-title">도시가스</div>
+          <div class="u-rows">
+            <div class="u-row">
+              <span class="u-label">남부5</span>
+              <span class="u-num">02-878-0074</span>
+              <div class="u-btns">
+                <a href="tel:028780074" class="u-btn" aria-label="전화">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                </a>
+                <button class="u-btn" onclick="copyNum('028780074', this)" aria-label="복사">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="u-row">
+              <span class="u-label">통합</span>
+              <span class="u-num">1588-5788</span>
+              <div class="u-btns">
+                <a href="tel:15885788" class="u-btn" aria-label="전화">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                </a>
+                <button class="u-btn" onclick="copyNum('15885788', this)" aria-label="복사">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="u-footer">
+            <div class="u-info">
+              <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>남부5 · 평일 09~18시 / 토 09~14시 / 일 휴무 &nbsp;|&nbsp; 통합 · 월~일 09~18시</span>
+            </div>
+            <div class="u-info">
+              <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 00-8 8c0 5.4 7.05 11.5 7.35 11.76a1 1 0 001.3 0C13.95 21.5 20 15.4 20 10a8 8 0 00-8-8z"/></svg>
+              <span>가스계량기 · 별도 보일러실 및 외부 (임대인확인예정)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="u-box">
+          <div class="u-title">전기</div>
+          <div class="u-rows">
+            <div class="u-row">
+              <span class="u-label">한전</span>
+              <span class="u-num">123</span>
+              <div class="u-btns">
+                <a href="tel:123" class="u-btn" aria-label="전화">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                </a>
+                <button class="u-btn" onclick="copyNum('123', this)" aria-label="복사">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="u-footer">
+            <div class="u-info">
+              <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>국번없이 · 08~20시</span>
+            </div>
+            <div class="u-info">
+              <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 00-8 8c0 5.4 7.05 11.5 7.35 11.76a1 1 0 001.3 0C13.95 21.5 20 15.4 20 10a8 8 0 00-8-8z"/></svg>
+              <span>전기계량기 · 1층 주차장 왼쪽 벽면</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 3 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>3</span></div>
+        <span class="card-title">주의사항</span>
+      </div>
+      <div class="card-body">
+
+        <div class="sub-title">폐기물 처리</div>
+
+        <ul class="bullet-list">
+          <li>대형 폐기물은 빼기 앱 또는 지자체 신고 후 처리하시고, 완료 내역을 전달해 주세요.</li>
+          <li>배출 장소: 건물 1층 계단 옆 벽면, 정돈된 상태로 배출</li>
+          <li class="strong-item">주차장 배출 절대 금지</li>
+          <li>보행자 및 차량 이동에 지장 없도록 배출해 주세요.</li>
+          <li>피해 발생 시 임차인 책임입니다.</li>
+        </ul>
+
+        <div class="alert alert-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="alert-text"><strong>무단 배출 적발 시</strong> 처리 비용 및 인건비가 청구됩니다.</div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="sub-title">룸체크 점검 항목</div>
+
+        <ul class="bullet-list">
+          <li>벽지, 바닥, 문 등 파손 여부</li>
+          <li>냉장고, 출입문 등 스티커 부착 시 원상복구</li>
+          <li>싱크대, 세면대, 욕조, 변기 등 배수 막힘 여부</li>
+        </ul>
+
+        <div class="alert alert-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="alert-text"><strong>사용상 과실로 인한 수리 및 원상복구 비용은 청구될 수 있습니다.</strong> 비용이 크게 발생할 수 있으니 사전 조치를 권장드립니다.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 4 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>4</span></div>
+        <span class="card-title">보증금 반환 안내</span>
+      </div>
+      <div class="card-body">
+
+        <div class="sub-title">반환 절차</div>
+
+        <div class="steps">
+          <div class="step-box">
+            <div class="step-num">STEP 1</div>
+            <div class="step-label">이삿짐<br>완전 퇴거</div>
+          </div>
+          <span class="step-arrow">›</span>
+          <div class="step-box">
+            <div class="step-num">STEP 2</div>
+            <div class="step-label">룸체크<br>완료</div>
+          </div>
+          <span class="step-arrow">›</span>
+          <div class="step-box">
+            <div class="step-num">STEP 3</div>
+            <div class="step-label">공과금<br>정산 확인</div>
+          </div>
+          <span class="step-arrow">›</span>
+          <div class="step-box final">
+            <div class="step-num">완료</div>
+            <div class="step-label">보증금<br>반환</div>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="sub-title">반환 계좌 전달</div>
+
+        <div style="display:flex; flex-direction:column; gap:7px;">
+          <div class="account-item">
+            <div class="account-dot"></div>
+            <div class="account-text"><strong>기관 대출 상환 시</strong> · 해당 기관 계좌번호 전달</div>
+          </div>
+          <div class="account-item">
+            <div class="account-dot"></div>
+            <div class="account-text"><strong>임차인 직접 수령 시</strong> · 계약자 명의 계좌번호 전달</div>
+          </div>
+        </div>
+
+        <div class="alert alert-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="alert-text">반환 계좌는 <strong>퇴실 1주일 전까지</strong> 문자 또는 카카오톡으로 전달해 주세요.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── 푸터 ─── -->
+  <footer class="footer">
+    <p class="footer-contact">문의사항은 임대인에게 연락 바랍니다.</p>
+    <p class="footer-brand">남현오피스텔</p>
+  </footer>
+
+</div>
+
+<script>
+  // 스크롤 Fade-in + Slide-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.card').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+    observer.observe(el);
+  });
+
+  // 복사 버튼
+  function copyNum(num, btn) {
+    const svg = btn.querySelector('svg');
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(num);
+    } else {
+      const t = document.createElement('textarea');
+      t.value = num;
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand('copy');
+      document.body.removeChild(t);
+    }
+    svg.innerHTML = '<polyline points="20 6 9 17 4 12" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    btn.style.background = '#fff0f4';
+    btn.style.borderColor = 'var(--red-border)';
+    setTimeout(() => {
+      svg.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>';
+      btn.style.background = '';
+      btn.style.borderColor = '';
+    }, 1500);
+  }
+</script>
+
+</body>
+</html>
