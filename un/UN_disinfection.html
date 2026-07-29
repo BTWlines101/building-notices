@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css">
   <style>
     :root {
-      --red: #FF385C;
-      --red-dark: #D93248;
-      --red-soft: #fff8f6;
-      --red-border: #ffd0c4;
+      --red: #3B82F6;
+      --red-dark: #1D4ED8;
+      --red-soft: #eff6ff;
+      --red-border: #bfdbfe;
       --text-1: #222222;
       --text-2: #484848;
       --text-3: #717171;
@@ -144,7 +144,7 @@
       gap: 10px;
       padding: 14px 16px 12px;
       border-bottom: 1px solid var(--border);
-      background: linear-gradient(to right, rgba(255,56,92,0.04), transparent);
+      background: linear-gradient(to right, rgba(59,130,246,0.06), transparent);
     }
 
     .card-num {
@@ -179,7 +179,7 @@
 
     /* ── 강조 박스 ── */
     .emphasis-box {
-      background: linear-gradient(135deg, var(--red-soft), #fff5f3);
+      background: linear-gradient(135deg, var(--red-soft), #f2f8ff);
       border: 1px solid var(--red-border);
       border-radius: 12px;
       padding: 14px 16px;
@@ -352,19 +352,32 @@
 
     /* ── 신청 버튼 ── */
     .cta-button {
-      display: block;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
       background: var(--red);
       color: #fff !important;
       font-weight: 700;
       font-size: 14px;
-      padding: 13px 16px;
+      padding: 14px 16px;
       border-radius: 10px;
       text-decoration: none;
       letter-spacing: -0.2px;
+      box-shadow: 0 6px 16px rgba(59,130,246,0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .cta-button:active { opacity: 0.85; }
+    .cta-button svg {
+      width: 16px; height: 16px;
+      stroke: #fff;
+      flex-shrink: 0;
+    }
+
+    .cta-button:active {
+      transform: translateY(1px) scale(0.99);
+      box-shadow: 0 3px 10px rgba(59,130,246,0.3);
+    }
 
     /* ── 섹션 소제목 ── */
     .sub-title {
@@ -477,7 +490,7 @@
       </div>
       <div class="card-body">
 
-        <p class="body-text">아래 링크 또는 QR코드 스캔 후, 폼에서 원하시는 항목을 선택해 신청 바랍니다.</p>
+        <p class="body-text">아래 버튼을 눌러 폼에서 원하시는 항목을 선택해 신청 바랍니다.</p>
 
         <div style="display:flex; flex-direction:column; gap:7px;">
           <div class="option-item">
@@ -494,7 +507,12 @@
           </div>
         </div>
 
-        <a class="cta-button" href="https://forms.gle/SqU4Yo2J9T3gzYjY8" target="_blank" rel="noopener">신청 폼 바로가기</a>
+        <a class="cta-button" href="https://forms.gle/SqU4Yo2J9T3gzYjY8" target="_blank" rel="noopener">
+          신청 폼 바로가기
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
 
         <div class="alert alert-warning">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
