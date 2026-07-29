@@ -41,7 +41,7 @@
       max-width: 460px;
       width: 100%;
       margin: 0 auto;
-      padding: 0 0 60px;
+      padding: 0 0 110px;
       overflow-x: hidden;
     }
 
@@ -350,8 +350,20 @@
 
     .option-text strong { color: var(--text-1); font-weight: 600; }
 
-    /* ── 신청 버튼 ── */
-    .cta-button {
+    /* ── 하단 고정 신청 버튼 ── */
+    .sticky-cta {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 460px;
+      padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+      background: linear-gradient(to top, #ffffff 65%, rgba(255,255,255,0));
+      z-index: 50;
+    }
+
+    .sticky-cta-btn {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -359,24 +371,24 @@
       background: var(--red);
       color: #fff !important;
       font-weight: 700;
-      font-size: 14px;
-      padding: 14px 16px;
-      border-radius: 10px;
+      font-size: 15px;
+      padding: 15px 16px;
+      border-radius: 12px;
       text-decoration: none;
       letter-spacing: -0.2px;
-      box-shadow: 0 6px 16px rgba(59,130,246,0.35);
+      box-shadow: 0 6px 20px rgba(59,130,246,0.4);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .cta-button svg {
-      width: 16px; height: 16px;
+    .sticky-cta-btn svg {
+      width: 17px; height: 17px;
       stroke: #fff;
       flex-shrink: 0;
     }
 
-    .cta-button:active {
+    .sticky-cta-btn:active {
       transform: translateY(1px) scale(0.99);
-      box-shadow: 0 3px 10px rgba(59,130,246,0.3);
+      box-shadow: 0 3px 12px rgba(59,130,246,0.35);
     }
 
     /* ── 섹션 소제목 ── */
@@ -490,7 +502,7 @@
       </div>
       <div class="card-body">
 
-        <p class="body-text">아래 버튼을 눌러 폼에서 원하시는 항목을 선택해 신청 바랍니다.</p>
+        <p class="body-text">화면 하단 버튼을 눌러 폼에서 원하시는 항목을 선택해 신청 바랍니다.</p>
 
         <div style="display:flex; flex-direction:column; gap:7px;">
           <div class="option-item">
@@ -506,13 +518,6 @@
             <div class="option-text">신청하지 않음</div>
           </div>
         </div>
-
-        <a class="cta-button" href="https://forms.gle/SqU4Yo2J9T3gzYjY8" target="_blank" rel="noopener">
-          신청 폼 바로가기
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </a>
 
         <div class="alert alert-warning">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -557,6 +562,15 @@
     <p class="footer-brand">우남오피스텔</p>
   </footer>
 
+</div>
+
+<div class="sticky-cta">
+  <a class="sticky-cta-btn" href="https://forms.gle/SqU4Yo2J9T3gzYjY8" target="_blank" rel="noopener">
+    신청 폼 바로가기
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+    </svg>
+  </a>
 </div>
 
 <script>
