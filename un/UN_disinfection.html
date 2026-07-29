@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>우남오피스텔 방역 소독 안내</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css">
+  <style>
+    :root {
+      --red: #FF385C;
+      --red-dark: #D93248;
+      --red-soft: #fff8f6;
+      --red-border: #ffd0c4;
+      --text-1: #222222;
+      --text-2: #484848;
+      --text-3: #717171;
+      --border: #e8e8e8;
+      --bg: #f7f7f7;
+      --card: #ffffff;
+      --shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Pretendard Variable', -apple-system, sans-serif;
+      background: #ffffff;
+      background-image: radial-gradient(#d4d4d4 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: var(--text-1);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 460px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 0 60px;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--red);
+      padding: 16px 20px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .header-inner { position: relative; z-index: 1; }
+
+    .header-top-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .header-icon-wrap {
+      width: 22px; height: 22px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .header-icon-wrap svg { width: 12px; height: 12px; stroke: #fff; }
+
+    .header-building-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .header-divider-dot {
+      width: 3px; height: 3px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+    }
+
+    .header-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.4px;
+    }
+
+    .header-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: -0.1px;
+      padding-left: 30px;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      padding: 20px 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 16px;
+      border: 1px solid rgba(232,232,232,0.9);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 28px rgba(0,0,0,0.12);
+    }
+
+    /* ── CARD HEADER ── */
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(to right, rgba(255,56,92,0.04), transparent);
+    }
+
+    .card-num {
+      width: 26px; height: 26px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-num span {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-1);
+      letter-spacing: -0.3px;
+      flex: 1;
+    }
+
+    /* ── CARD BODY ── */
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ── 강조 박스 ── */
+    .emphasis-box {
+      background: linear-gradient(135deg, var(--red-soft), #fff5f3);
+      border: 1px solid var(--red-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .emphasis-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-1);
+      line-height: 1.55;
+      letter-spacing: -0.3px;
+    }
+
+    .highlight-date {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 1px 8px;
+      border-radius: 4px;
+      margin: 0 2px;
+      vertical-align: middle;
+    }
+
+    /* ── 인사말 ── */
+    .intro-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.75;
+      letter-spacing: -0.2px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      padding: 2px 2px 4px;
+    }
+
+    .intro-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 8px;
+    }
+
+    /* ── 본문 텍스트 ── */
+    .body-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.7;
+      letter-spacing: -0.2px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    /* ── 경고/안내 배너 ── */
+    .alert {
+      border-radius: 10px;
+      padding: 11px 13px;
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+    }
+
+    .alert-warning {
+      background: var(--red-soft);
+      border: 1px solid var(--red-border);
+      border-left: 3px solid var(--red);
+    }
+
+    .alert-info {
+      background: #f7f5f2;
+      border: 1px solid #e0dbd4;
+      border-left: 3px solid #b8b0a6;
+    }
+
+    .alert svg {
+      width: 14px; height: 14px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .alert-warning svg { stroke: var(--red-dark); }
+    .alert-info svg { stroke: #9e958a; }
+
+    .alert-text {
+      font-size: 12px;
+      color: var(--text-2);
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .alert-text strong { color: var(--text-1); font-weight: 600; }
+
+    /* ── 불릿 리스트 ── */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .bullet-list li {
+      display: flex;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+    }
+
+    .bullet-list li::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--red);
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .bullet-list li strong { color: var(--text-1); font-weight: 700; }
+
+    .bl-content { flex: 1; min-width: 0; }
+    .bl-main {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-1);
+      margin-bottom: 2px;
+      word-break: keep-all;
+    }
+    .bl-sub {
+      font-size: 12px;
+      color: var(--text-3);
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+
+    /* ── 신청 항목 카드 ── */
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fafafa;
+    }
+
+    .option-num {
+      width: 20px; height: 20px;
+      background: var(--red);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .option-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.5;
+      letter-spacing: -0.1px;
+    }
+
+    .option-text strong { color: var(--text-1); font-weight: 600; }
+
+    /* ── 신청 버튼 ── */
+    .cta-button {
+      display: block;
+      text-align: center;
+      background: var(--red);
+      color: #fff !important;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 13px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+
+    .cta-button:active { opacity: 0.85; }
+
+    /* ── 섹션 소제목 ── */
+    .sub-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sub-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── 푸터 ── */
+    .footer {
+      margin: 24px 16px 0;
+      padding: 16px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.8);
+      border-radius: 12px;
+    }
+
+    .footer-contact {
+      font-size: 12px;
+      color: var(--text-3);
+      margin-bottom: 4px;
+    }
+
+    .footer-brand {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: -0.3px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ─── 헤더 ─── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-top-row">
+        <div class="header-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <span class="header-building-name">우남오피스텔</span>
+        <div class="header-divider-dot"></div>
+        <span class="header-title">방역 소독 안내</span>
+      </div>
+      <p class="header-sub">세대 내 방역 소독 일정을 안내드리니 확인해 주세요.</p>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <p class="intro-text">
+      <strong>안녕하세요, 우남오피스텔 임대인입니다.</strong>
+      쾌적하고 위생적인 주거 환경 조성을 위해 아래와 같이 세대 내 방역 소독을 실시하오니 확인 부탁드립니다.
+    </p>
+
+    <!-- ─── Section 1: 일시 및 방식 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>1</span></div>
+        <span class="card-title">방역 소독 일시 및 방식</span>
+      </div>
+      <div class="card-body">
+
+        <div class="emphasis-box">
+          <div class="emphasis-text">일시 : <span class="highlight-date">2026년 8월 3일(수) 09:00~18:00</span></div>
+        </div>
+
+        <div class="sub-title">방역 방식</div>
+
+        <ul class="bullet-list">
+          <li>
+            <div class="bl-content">
+              <div class="bl-main">분무 소독</div>
+              <div class="bl-sub">씽크대 하부, 배수구, 신발장 등 (해충 소독약 희석액 사용)</div>
+            </div>
+          </li>
+          <li>
+            <div class="bl-content">
+              <div class="bl-main">독먹이법</div>
+              <div class="bl-sub">맥스포스겔(바퀴벌레 방지 약제) 신청 세대별 5개 제공</div>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 2: 신청 안내 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>2</span></div>
+        <span class="card-title">신청 안내</span>
+      </div>
+      <div class="card-body">
+
+        <p class="body-text">아래 링크 또는 QR코드 스캔 후, 폼에서 원하시는 항목을 선택해 신청 바랍니다.</p>
+
+        <div style="display:flex; flex-direction:column; gap:7px;">
+          <div class="option-item">
+            <div class="option-num">1</div>
+            <div class="option-text">세대 내 소독 신청 <span style="color:var(--text-3);">(방역 인력 방문 + 독먹이캡 제공)</span></div>
+          </div>
+          <div class="option-item">
+            <div class="option-num">2</div>
+            <div class="option-text">독먹이캡만 전달 요청 <span style="color:var(--text-3);">(방문 없이 우편함 전달)</span></div>
+          </div>
+          <div class="option-item">
+            <div class="option-num">3</div>
+            <div class="option-text">신청하지 않음</div>
+          </div>
+        </div>
+
+        <a class="cta-button" href="https://forms.gle/SqU4Yo2J9T3gzYjY8" target="_blank" rel="noopener">신청 폼 바로가기</a>
+
+        <div class="alert alert-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="alert-text">신청 기한은 <strong>8월 2일(일) 낮 12시까지</strong>이며, 마감 이후에는 접수가 불가합니다.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 3: 협조 요청 사항 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>3</span></div>
+        <span class="card-title">협조 요청 사항</span>
+      </div>
+      <div class="card-body">
+
+        <ul class="bullet-list">
+          <li>전 세대 순차 방문 방식으로 진행되어 세대별 방문 시간 지정이 어렵습니다.</li>
+          <li>독먹이캡은 씽크대 안쪽·하부 등 세대 내 구석에 세대별로 직접 부착 바랍니다.</li>
+          <li>부재 시 방문 소독은 비밀번호를 제공해 주신 세대에 한해 진행 가능합니다.</li>
+        </ul>
+
+        <div class="alert alert-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <div class="alert-text">분무 소독액은 희석되어 일반적으로 안전하나, <strong>고가의 신발 등 각별한 주의가 필요한 물품</strong>은 소독 구역 밖으로 옮겨 주시기 바랍니다.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── 푸터 ─── -->
+  <footer class="footer">
+    <p class="footer-contact">문의사항은 임대인에게 연락 바랍니다.</p>
+    <p class="footer-brand">우남오피스텔</p>
+  </footer>
+
+</div>
+
+<script>
+  // 스크롤 Fade-in + Slide-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.card').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.06}s`;
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
