@@ -294,8 +294,8 @@
     }
 
     .bullet-list li {
-      display: flex;
-      gap: 8px;
+      position: relative;
+      padding-left: 13px;
       font-size: 13px;
       color: var(--text-2);
       line-height: 1.6;
@@ -304,11 +304,12 @@
 
     .bullet-list li::before {
       content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
       width: 5px; height: 5px;
       background: var(--red);
       border-radius: 50%;
-      margin-top: 7px;
-      flex-shrink: 0;
     }
 
     .bullet-list li.strong-item {
@@ -492,6 +493,8 @@
         <p class="body-text">이사 종료 예정 시간을 이사일 제외 7일 전까지 임대인에게 전달해 주세요.</p>
 
         <p class="body-text">임대인도 당일 다른 일정이 있을 수 있어, 사전에 종료 예정 시간을 알려주셔야 예정 시간에 맞춰 방문이 가능합니다.</p>
+
+        <p class="body-text">늦은 저녁, 이른 아침 퇴실, 또는 임대인의 부득이한 사정으로 이사 당일 해당 시간대에 현장 방문이 어려운 경우, 룸체크 일정 등은 이사 전 협의를 통해 조정될 수 있습니다.</p>
 
         <div class="alert alert-warning">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
