@@ -503,8 +503,8 @@
     }
 
     .bullet-list li {
-      display: flex;
-      gap: 8px;
+      position: relative;
+      padding-left: 13px;
       font-size: 13px;
       color: var(--text-2);
       line-height: 1.6;
@@ -513,11 +513,12 @@
 
     .bullet-list li::before {
       content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
       width: 5px; height: 5px;
       background: #F43F5E;
       border-radius: 50%;
-      margin-top: 7px;
-      flex-shrink: 0;
     }
 
     .bullet-list li.strong-item {
@@ -703,6 +704,8 @@
 
         <p class="body-text">임대인도 당일 다른 일정이 있을 수 있어, 사전에 종료 예정 시간을 알려주셔야 예정 시간에 맞춰 방문이 가능합니다.</p>
 
+        <p class="body-text">늦은 저녁, 이른 아침 퇴실, 또는 임대인의 부득이한 사정으로 이사 당일 해당 시간대에 현장 방문이 어려운 경우, 룸체크 일정 등은 이사 전 협의를 통해 조정될 수 있습니다.</p>
+
         <div class="alert alert-warning">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
@@ -840,6 +843,14 @@
         <span class="card-title">주의사항</span>
       </div>
       <div class="card-body">
+
+        <div class="sub-title">비품 확인</div>
+
+        <ul class="bullet-list">
+          <li>에어컨 리모컨을 씽크대 위 등 눈에 잘 보이는 곳에 놓아두세요.</li>
+        </ul>
+
+        <div class="section-divider"></div>
 
         <div class="sub-title">폐기물 처리</div>
 
