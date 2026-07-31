@@ -219,6 +219,64 @@
       vertical-align: middle;
     }
 
+    /* ── 인사말 ── */
+    .intro-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.75;
+      letter-spacing: -0.2px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      padding: 2px 2px 4px;
+    }
+
+    .intro-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 8px;
+    }
+
+    /* ── 강조 알림 박스 (핵심 경고) ── */
+    .critical-box {
+      background: linear-gradient(135deg, var(--red-soft), #fff5f3);
+      border: 1.5px solid var(--red);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .critical-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      background: var(--red);
+      padding: 3px 9px;
+      border-radius: 20px;
+      width: fit-content;
+    }
+
+    .critical-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-1);
+      line-height: 1.5;
+      letter-spacing: -0.2px;
+    }
+
+    .critical-desc {
+      font-size: 12.5px;
+      color: var(--text-2);
+      line-height: 1.65;
+      letter-spacing: -0.1px;
+    }
+
     /* ── 본문 텍스트 ── */
     .body-text {
       font-size: 13px;
@@ -686,6 +744,11 @@
 
   <div class="content">
 
+    <p class="intro-text">
+      <strong>안녕하세요, 풍전오피스텔 임대인입니다.</strong>
+      그간 잘 거주해주셔서 감사합니다. 원활한 퇴실을 위해 아래와 같이 안내드리니 보증금 반환 및 거주세대 확인절차 등에 문제가 발생하지 않도록 확인 부탁드립니다.
+    </p>
+
     <!-- ─── Section 1 ─── -->
     <div class="card">
       <div class="card-header">
@@ -855,11 +918,13 @@
         <div class="sub-title">폐기물 처리</div>
 
         <ul class="bullet-list">
+          <li>세대에는 기존에 있던 비치 물품 외에는 이사 시 정리해주셔야 합니다.</li>
           <li>대형 폐기물은 빼기 앱 또는 지자체 신고 후 처리하시고, 완료 내역을 전달해 주세요.</li>
+          <li>폐기물에 폐기필증 또는 배출신고 내역이 반드시 부착되어 있어야 합니다.</li>
           <li>배출 장소: 주차장 제일 오른쪽 전면(도로쪽) 벽면, 정돈된 상태로 배출</li>
           <li>다른 주차 차량에 손상이 가지 않도록 주의해 주세요.</li>
-          <li class="strong-item">넘어짐 등 차량 손상 발생 시 임차인 책임</li>
           <li>보행자 및 차량 이동에 지장 없도록 배출해 주세요.</li>
+          <li class="strong-item">차량피해, 보행자 피해 발생 시 임차인 책임입니다.</li>
         </ul>
 
         <div class="alert alert-warning">
@@ -868,6 +933,28 @@
             <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
           </svg>
           <div class="alert-text"><strong>무단 배출 적발 시</strong> 처리 비용 및 인건비가 청구됩니다.</div>
+        </div>
+
+        <div class="critical-box">
+          <span class="critical-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:#fff;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            필독
+          </span>
+          <div class="critical-title">폐기물 처리 시 주의사항</div>
+          <div class="critical-desc">다음과 같은 행위가 발생하고 있습니다.</div>
+          <ul class="bullet-list">
+            <li>재활용 분리수거장에 재활용이 아닌 물품을 몰래 버리는 행위</li>
+            <li>계단 등 건물 구석구석에 처리하기 애매한 폐기물을 두고 가는 행위</li>
+          </ul>
+          <div class="critical-desc">이런 경우:</div>
+          <ul class="bullet-list">
+            <li>처리 인건비만 최소 10만 원부터 발생하며, 폐기물 자체 처리비보다 훨씬 큽니다.</li>
+            <li class="strong-item">정리가 완료될 때까지 보증금을 반환해드리지 않습니다.</li>
+          </ul>
+          <div class="critical-desc">간곡한 부탁의 말씀 드립니다. 이삿날 분쟁이 생기는 것을 원하지 않습니다. 대부분의 분쟁은 재활용 분리수거대에 처리곤란 물품을 그대로 두거나, 폐기물을 처리하지 않는 경우에서 발생합니다. 정리 잘 해주시면 너무 감사하겠습니다.</div>
         </div>
 
         <div class="section-divider"></div>
@@ -926,15 +1013,28 @@
 
         <div class="sub-title">반환 계좌 전달</div>
 
-        <div style="display:flex; flex-direction:column; gap:7px;">
-          <div class="account-item">
-            <div class="account-dot"></div>
-            <div class="account-text"><strong>기관 대출 상환 시</strong> · 해당 기관 계좌번호 전달</div>
-          </div>
-          <div class="account-item">
-            <div class="account-dot"></div>
-            <div class="account-text"><strong>임차인 직접 수령 시</strong> · 계약자 명의 계좌번호 전달</div>
-          </div>
+        <div class="critical-box">
+          <span class="critical-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:#fff;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            매우 중요
+          </span>
+          <div class="critical-title">임차인에게의 반환이 아닌, 금융기관으로 임대인 직접 상환 시</div>
+          <div class="critical-desc">임대인이 직접 기관에 상환해야 하는 대출이 많습니다. 반드시 사전에 확인하셔서 임대인에게 계좌를 안내해 주셔야 반환이 가능합니다. 잘못된 계좌 안내, 또는 임차인 반환이 아님에도 사전 안내 없이 임차인 계좌로 반환된 경우 <strong>대출기관 상환의무는 임차인에게 있습니다.</strong></div>
+        </div>
+
+        <div class="critical-box">
+          <span class="critical-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:#fff;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            매우 중요
+          </span>
+          <div class="critical-title">임차인 직접 수령 시</div>
+          <div class="critical-desc"><span class="highlight-date">계약자 명의</span> 계좌번호로만 전달 가능합니다.</div>
         </div>
 
         <div class="alert alert-warning">
