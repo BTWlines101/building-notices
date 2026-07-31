@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>풍전오피스텔 입주 안내</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css">
+  <style>
+    :root {
+      --red: #FF385C;
+      --red-dark: #D93248;
+      --red-soft: #fff8f6;
+      --red-border: #ffd0c4;
+      --text-1: #222222;
+      --text-2: #484848;
+      --text-3: #717171;
+      --border: #e8e8e8;
+      --bg: #f7f7f7;
+      --card: #ffffff;
+      --shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Pretendard Variable', -apple-system, sans-serif;
+      background: #ffffff;
+      background-image: radial-gradient(#d4d4d4 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: var(--text-1);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 460px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 0 60px;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--red);
+      padding: 16px 20px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .header-inner { position: relative; z-index: 1; }
+
+    .header-top-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .header-icon-wrap {
+      width: 22px; height: 22px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .header-icon-wrap svg { width: 12px; height: 12px; stroke: #fff; }
+
+    .header-building-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .header-divider-dot {
+      width: 3px; height: 3px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+    }
+
+    .header-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.4px;
+    }
+
+    .header-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: -0.1px;
+      padding-left: 30px;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      padding: 20px 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 16px;
+      border: 1px solid rgba(232,232,232,0.9);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 28px rgba(0,0,0,0.12);
+    }
+
+    /* ── CARD HEADER ── */
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(to right, rgba(255,56,92,0.04), transparent);
+    }
+
+    .card-num {
+      width: 26px; height: 26px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-num span {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-1);
+      letter-spacing: -0.3px;
+      flex: 1;
+    }
+
+    .badge-required {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--red-dark);
+      background: var(--red-soft);
+      border: 1px solid var(--red-border);
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    /* ── CARD BODY ── */
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ── 강조 박스 ── */
+    .emphasis-box {
+      background: linear-gradient(135deg, var(--red-soft), #fff5f3);
+      border: 1px solid var(--red-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .emphasis-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-1);
+      line-height: 1.55;
+      letter-spacing: -0.3px;
+    }
+
+    .highlight-date {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 1px 8px;
+      border-radius: 4px;
+      margin: 0 2px;
+      vertical-align: middle;
+    }
+
+    /* ── 인사말 ── */
+    .intro-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.75;
+      letter-spacing: -0.2px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      padding: 2px 2px 4px;
+    }
+
+    .intro-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 8px;
+    }
+
+    /* ── 본문 텍스트 ── */
+    .body-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.7;
+      letter-spacing: -0.2px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    /* ── 경고/안내 배너 ── */
+    .alert {
+      border-radius: 10px;
+      padding: 11px 13px;
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+    }
+
+    .alert-warning {
+      background: var(--red-soft);
+      border: 1px solid var(--red-border);
+      border-left: 3px solid var(--red);
+    }
+
+    .alert-info {
+      background: #f7f5f2;
+      border: 1px solid #e0dbd4;
+      border-left: 3px solid #b8b0a6;
+    }
+
+    .alert svg {
+      width: 14px; height: 14px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .alert-warning svg { stroke: var(--red-dark); }
+    .alert-info svg { stroke: #9e958a; }
+
+    .alert-text {
+      font-size: 12px;
+      color: var(--text-2);
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .alert-text strong { color: var(--text-1); font-weight: 600; }
+
+    /* ── 불릿 리스트 ── */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .bullet-list li {
+      display: flex;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+    }
+
+    .bullet-list li::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--red);
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .bullet-list li.strong-item {
+      color: var(--text-1);
+      font-weight: 600;
+    }
+
+    .bullet-list li.strong-item::before {
+      background: var(--red-dark);
+      width: 6px; height: 6px;
+    }
+
+    .bullet-list li strong { color: var(--text-1); font-weight: 700; }
+
+    .bl-content { flex: 1; min-width: 0; }
+    .bl-main {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-1);
+      margin-bottom: 2px;
+      word-break: keep-all;
+    }
+    .bl-sub {
+      font-size: 12px;
+      color: var(--text-3);
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+
+    /* ── 계좌/비교 항목 (표 대체) ── */
+    .account-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fafafa;
+    }
+
+    .account-dot {
+      width: 7px; height: 7px;
+      background: var(--red);
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .account-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.5;
+      letter-spacing: -0.1px;
+    }
+
+    .account-text strong { color: var(--text-1); font-weight: 600; }
+
+    /* ── 연락처 카드 (전화 걸기 / 복사) ── */
+    .contact-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 12px 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fafafa;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .contact-label { font-size: 11px; color: var(--text-3); }
+    .contact-number {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -0.2px;
+    }
+
+    .contact-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+    .icon-btn {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--red-border);
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s ease;
+    }
+
+    .icon-btn svg { width: 14px; height: 14px; stroke: var(--red-dark); }
+
+    .icon-btn:active { background: var(--red-soft); }
+
+    /* ── 구분선 ── */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 0;
+    }
+
+    /* ── 섹션 소제목 ── */
+    .sub-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sub-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── 푸터 ── */
+    .footer {
+      margin: 24px 16px 0;
+      padding: 16px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.8);
+      border-radius: 12px;
+    }
+
+    .footer-contact {
+      font-size: 12px;
+      color: var(--text-3);
+      margin-bottom: 4px;
+    }
+
+    .footer-brand {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: -0.3px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ─── 헤더 ─── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-top-row">
+        <div class="header-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <span class="header-building-name">풍전오피스텔</span>
+        <div class="header-divider-dot"></div>
+        <span class="header-title">입주 안내</span>
+      </div>
+      <p class="header-sub">입주 전 꼭 확인해 주셔야 할 사항입니다.</p>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <p class="intro-text">
+      <strong>안녕하세요, 풍전오피스텔 임대인입니다.</strong>
+      풍전오피스텔 입주를 환영합니다. 쾌적하고 안전한 거주환경 조성을 위해, 그리고 여러 세대가 함께 거주하는 공간인 만큼 운영관리상 유의하실 사항 몇 가지를 안내드립니다. 기타 자세한 사항은 계약서 특약사항을 확인해 주시기 바랍니다.
+    </p>
+
+    <!-- ─── Section 1: 제출 서류 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>1</span></div>
+        <span class="card-title">제출 서류 안내</span>
+      </div>
+      <div class="card-body">
+
+        <p class="body-text">임대차 신고 및 확정일자를 받으셨는지 여부를 카카오톡으로 임대인께 전달 부탁드립니다.</p>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 2: 입금자명 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>2</span></div>
+        <span class="card-title">입금은 반드시 '계약자 성함'만 기재</span>
+      </div>
+      <div class="card-body">
+
+        <div class="emphasis-box">
+          <div class="emphasis-text">월세, 관리비, 주차비 등 <span class="highlight-date">모든 비용</span>은 계약서에 기재된 지정계좌로 입금 부탁드립니다.</div>
+        </div>
+
+        <p class="body-text">입금 시에는 계약자 본인 성함만 기재하여 입금 바랍니다. 성함 외 어떠한 문구도 함께 기재하지 말아주세요.</p>
+
+        <p class="body-text">매월 수십 세대의 입금 내역을 일괄 정리·확인하는 과정에서, 입금자명에 성함 외 다른 정보가 붙어 있으면 자동 정리가 되지 않아 파악에 오류가 발생합니다.</p>
+
+        <div class="sub-title">아래 입금자명은 파악이 어렵습니다</div>
+
+        <ul class="bullet-list">
+          <li>
+            <div class="bl-content">
+              <div class="bl-main">성함 뒤에 월, 호수 등을 기재하여 입금(X)</div>
+              <div class="bl-sub">예: "홍길동(8월)", "홍길동 901호" → 일괄 정리가 되지 않습니다</div>
+            </div>
+          </li>
+          <li>
+            <div class="bl-content">
+              <div class="bl-main">호수만 표기하여 입금(X)</div>
+              <div class="bl-sub">예: "풍전 901호" → 호수 오타, 이전 계약자와의 혼동 우려</div>
+            </div>
+          </li>
+          <li>
+            <div class="bl-content">
+              <div class="bl-main">명목만 표기하여 입금(X)</div>
+              <div class="bl-sub">예: "풍전 8월 월세" → 세대 특정 불가</div>
+            </div>
+          </li>
+          <li>
+            <div class="bl-content">
+              <div class="bl-main">가족·지인 성함으로 입금(X)</div>
+              <div class="bl-sub">어느 계약자의 입금인지 전혀 알기 어려움</div>
+            </div>
+          </li>
+          <li>
+            <div class="bl-content">
+              <div class="bl-main">계약자 성함과 비슷하지만 다른 이름으로 입금(X)</div>
+              <div class="bl-sub">계약자 중 동명이인, 비슷한 이름도 있어 정확한 확인 어려움</div>
+            </div>
+          </li>
+        </ul>
+
+        <p class="body-text">본인이 직접 입금하지 않고 부모님 등 가족·지인이 대신 입금하는 경우에도, 반드시 계약자 본인 성함만 기재하여 입금해달라고 전달 바랍니다.</p>
+
+        <div class="alert alert-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="alert-text">계약자 성함 외 다른 입금자명으로 인한 <strong>납부 확인 누락 및 입증·검증 책임은 임차인</strong>에게 있습니다.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 3: 공과금(수도·전기·가스) 납부 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>3</span></div>
+        <span class="card-title">공과금(수도·전기·가스) 납부 안내</span>
+      </div>
+      <div class="card-body">
+
+        <p class="body-text">풍전오피스텔은 수도·전기·가스 요금을 각 회사로 개별 납부하셔야 합니다.</p>
+
+        <div class="alert alert-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="alert-text">매월 각 세대로 고지서가 발송되지만, 세대 수가 많다 보니 고지서 전달이 누락되는 경우가 종종 있습니다. 미납 시 <strong>연체료 부과 또는 사용 중단</strong>이 발생할 수 있으니 주의해 주시기 바랍니다.</div>
+        </div>
+
+        <p class="body-text">아래 연락처로 자동이체를 신청해 두시면 매월 별도로 납부하지 않아도 되어 편리합니다.</p>
+
+        <div class="sub-title">수도</div>
+
+        <div class="contact-card">
+          <div class="contact-info">
+            <span class="contact-label">남부사업소</span>
+            <span class="contact-number">02-3146-4400</span>
+          </div>
+          <div class="contact-actions">
+            <a class="icon-btn" href="tel:02-3146-4400" aria-label="전화 걸기">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+              </svg>
+            </a>
+            <button class="icon-btn" type="button" onclick="copyNumber(this, '02-3146-4400')" aria-label="번호 복사">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="sub-title">도시가스</div>
+
+        <div style="display:flex; flex-direction:column; gap:7px;">
+          <div class="contact-card">
+            <div class="contact-info">
+              <span class="contact-label">남부센터</span>
+              <span class="contact-number">02-878-0074</span>
+            </div>
+            <div class="contact-actions">
+              <a class="icon-btn" href="tel:02-878-0074" aria-label="전화 걸기">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+              </a>
+              <button class="icon-btn" type="button" onclick="copyNumber(this, '02-878-0074')" aria-label="번호 복사">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-info">
+              <span class="contact-label">통합콜센터</span>
+              <span class="contact-number">1588-5788</span>
+            </div>
+            <div class="contact-actions">
+              <a class="icon-btn" href="tel:1588-5788" aria-label="전화 걸기">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+              </a>
+              <button class="icon-btn" type="button" onclick="copyNumber(this, '1588-5788')" aria-label="번호 복사">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-title">전기</div>
+
+        <div class="contact-card">
+          <div class="contact-info">
+            <span class="contact-label">한국전력(한전)</span>
+            <span class="contact-number">123</span>
+          </div>
+          <div class="contact-actions">
+            <a class="icon-btn" href="tel:123" aria-label="전화 걸기">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+              </svg>
+            </a>
+            <button class="icon-btn" type="button" onclick="copyNumber(this, '123')" aria-label="번호 복사">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 4: 주차장 운영 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>4</span></div>
+        <span class="card-title">풍전오피스텔 주차장 운영 안내</span>
+      </div>
+      <div class="card-body">
+
+        <ul class="bullet-list">
+          <li><strong>월 등록 유료 주차</strong>로 운영됩니다.</li>
+          <li><strong>미등록차량 혹은 방문객 등의 일시·임시 주차는 불가</strong>합니다.</li>
+        </ul>
+
+        <p class="body-text">미등록차량, 방문객 차량이 주차되면 등록 주차 세대와 심하게 분쟁이 생길 수 있습니다. 주차공간은 거주 세대에게 개방된 공간이 아니며, 유료로 운영되는 공간임을 분명히 안내드립니다.</p>
+
+        <div class="alert alert-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="alert-text">미등록차량으로 인한 주차 불편 발생 시 비용 청구, 기타 거주 민원 미접수 등의 불이익이 있을 수 있으며, <strong>그 책임은 임차인</strong>에게 있습니다.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 5: 공용공간 적치금지 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>5</span></div>
+        <span class="card-title">세대 복도 및 공용공간 물건 적치 금지</span>
+      </div>
+      <div class="card-body">
+
+        <p class="body-text">세대 내부 공간을 제외한 복도, 계단, 옥상 등 공용공간은 임대공간이 아니므로, 생수, 우산꽂이 등 어떠한 개인물품도 비치하실 수 없습니다. 쾌적한 공용공간 유지를 위해 지속적으로 관리해나가고 있으며, 계약서 특약사항에도 명시된 내용이니 협조 부탁드립니다.</p>
+
+        <ul class="bullet-list">
+          <li>공용공간에는 개인 물품 적치가 금지됩니다.</li>
+          <li>위반 시 <strong>소방점검 관련 과태료 부과 대상</strong>이 됩니다.</li>
+          <li>건물 청소 용역 시 물품이 놓인 자리는 청소 대상에서 제외되어, 해당 구간 청소가 누락됩니다.</li>
+        </ul>
+
+        <div class="alert alert-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="alert-text">공용공간에 개인 물품을 적치할 경우 <strong>공용공간 점유 비용 청구, 물품 폐기, 민원 미접수</strong> 등의 조치가 진행될 예정이며, 그 불이익의 책임은 임차인에게 있습니다.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 6: 재활용 폐기물 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>6</span></div>
+        <span class="card-title">재활용 폐기물 분리배출 안내</span>
+      </div>
+      <div class="card-body">
+
+        <p class="body-text">재활용 폐기물 분리배출은 세대별로 가장 잘 지켜지지 않는 부분이라 간곡히 당부드립니다.</p>
+
+        <div class="sub-title">배출 위치</div>
+
+        <div style="display:flex; flex-direction:column; gap:7px;">
+          <div class="account-item">
+            <div class="account-dot"></div>
+            <div class="account-text"><strong>플라스틱·유리·비닐</strong> · 1층 주차장 안쪽 분리수거대</div>
+          </div>
+          <div class="account-item">
+            <div class="account-dot"></div>
+            <div class="account-text"><strong>종이류</strong> · 1층 분리수거대 옆</div>
+          </div>
+          <div class="account-item">
+            <div class="account-dot"></div>
+            <div class="account-text"><strong>음식물쓰레기</strong> · 1층 음식물쓰레기통</div>
+          </div>
+        </div>
+
+        <div class="sub-title">주의사항</div>
+
+        <ul class="bullet-list">
+          <li>종이류는 낱장으로 내놓지 마시고 종이상자·종이쇼핑백 등에 담아 정리해서 배출해 주세요. (다른 세대 종이 배출함에 함께 넣어도 무방)</li>
+          <li>음식물쓰레기는 반드시 전용 봉투를 구매해 담아서 배출해 주세요. (봉투 없이 직접 버리는 것 금지)</li>
+          <li>여행가방(캐리어), 전자제품, 가구 등 대형폐기물이나 일반 재활용 품목이 아닌 폐기물은 지자체 신고 또는 배출 신고 앱을 통해 직접 비용을 납부하고 배출내역을 부착한 후, 지정된 방법으로 배출해야 합니다.</li>
+        </ul>
+
+        <div class="sub-title">위반 시</div>
+
+        <div class="alert alert-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="alert-text">규정에 맞지 않게 배출된 폐기물은 <strong>CCTV 확인 후</strong> 처리 비용이 청구됩니다.</div>
+        </div>
+
+        <p class="body-text">대형폐기물이라 하더라도 폐기 비용 자체는 대부분 몇천 원~만 원대 수준이나, 제대로 처리되지 않아 관리인이 직접 처리하는 경우에는 단건 인건비 처리비용으로 <strong>5~10만 원 수준이 청구</strong>됩니다. 폐기물 처리비용보다 인건비가 더 비쌉니다. 배출 방법이 애매한 품목은 사전에 인터넷 검색, 지자체 문의 후 올바로 처리 부탁드립니다.</p>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 7: 도어락 건전지 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>7</span></div>
+        <span class="card-title">도어락 건전지는 주기적으로 교체</span>
+      </div>
+      <div class="card-body">
+
+        <p class="body-text">도어락 건전지 교체가 제때 이루어지지 않으면, 외부에서 건전지 등으로도 문이 열리지 않아 도어락을 전체 교체해야 하는 상황이 발생합니다.</p>
+
+        <ul class="bullet-list">
+          <li>도어락 건전지는 주기적으로 교체 바랍니다.</li>
+          <li class="strong-item">건전지 미교체 등으로 인한 출입 불가 시 도어락 교체비용이 발생하니 유의 바랍니다.</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 8: 건물 파손 금지 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>8</span></div>
+        <span class="card-title">건물 파손·훼손 및 고장 유발 행위 절대 금지</span>
+      </div>
+      <div class="card-body">
+
+        <p class="body-text">아주 간혹, 극히 일부 세대이지만 아래와 같은 행위를 하는 경우가 있어 주의 안내드립니다.</p>
+
+        <ul class="bullet-list">
+          <li class="strong-item">1층 현관문을 발로 차는 행위</li>
+          <li class="strong-item">출입문 버튼을 주먹으로 세게 내려치는 행위</li>
+          <li class="strong-item">엘리베이터 시설을 발로 차거나 버튼을 주먹으로 내려치는 행위</li>
+          <li class="strong-item">엘리베이터 내부에 침을 뱉는 행위 등</li>
+        </ul>
+
+        <div class="alert alert-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="alert-text">이런 안내를 드려야 하는지 의문이 들 정도의 행위입니다. 이는 자제를 부탁드리는 수준이 아니라 <strong>해서는 안 되는 행위</strong>이며, 적발 시 그 책임은 해당 임차인에게 있음을 안내드립니다.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 9: 월세·관리비 명칭안내 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>9</span></div>
+        <span class="card-title">월세·관리비 소통 시 명칭안내</span>
+      </div>
+      <div class="card-body">
+
+        <p class="body-text">같은 거주기간의 월납부금액에 대해 임대인과 임차인이 서로 다른 월로 부르는 경우가 있어, 소통 혼선을 줄이기 위해 안내드립니다.</p>
+
+        <p class="body-text">문의·정산 안내 등 임대인과의 소통 시 '몇 월 월세'를 지칭할 때, 계약서상 발생일(=실제 입금일) 기준으로 참고 바랍니다.</p>
+
+        <div class="sub-title">예시 · 3/3 입주자 (거주기간 3/3~4/2 동일)</div>
+
+        <div style="display:flex; flex-direction:column; gap:7px;">
+          <div class="account-item">
+            <div class="account-dot"></div>
+            <div class="account-text"><strong>선불 계약</strong> · 매월 3일 입금 → 3월 월세·관리비·주차비</div>
+          </div>
+          <div class="account-item">
+            <div class="account-dot"></div>
+            <div class="account-text"><strong>후불 계약</strong> · 매월 2일 입금 → 4월 월세·관리비·주차비</div>
+          </div>
+        </div>
+
+        <p class="body-text">즉, 거주기간이 같더라도 입금하는 달에 따라 명칭이 달라집니다.</p>
+
+        <div class="alert alert-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <div class="alert-text">이 기준은 임대인과의 소통(카톡, 전화 시) 대화할 때 혼선을 방지하기 위한 안내이며, 실제 입금은 <strong>2번 안내에 따라 계약자 성함만 기재</strong>될 수 있게 입금하시면 됩니다.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Section 10: 상호 예의 ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num"><span>10</span></div>
+        <span class="card-title">상호 예의에 관한 부탁 말씀</span>
+      </div>
+      <div class="card-body">
+
+        <p class="body-text">임대인과 임차인, 그리고 임차인 상호 간에도 존중의 언어로 소통 부탁드립니다.</p>
+
+        <ul class="bullet-list">
+          <li>임대인과의 소통에서 사소한 대화에도 서로 기분 좋게 대화할 수 있도록 존중의 언어를 사용해 주시면 감사하겠습니다.</li>
+          <li>주차, 층간소음 등 세대 간 소통이 필요한 경우, 서로 예의를 갖추고 대화 부탁드립니다.</li>
+          <li>임대인, 임차인, 이웃세대 임차인 모두 존중으로 소통해야 하는 성인입니다. 존중의 언어로 배려 있게 소통 부탁드립니다.</li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── 푸터 ─── -->
+  <footer class="footer">
+    <p class="footer-contact">문의사항은 임대인에게 연락 바랍니다.</p>
+    <p class="footer-brand">풍전오피스텔</p>
+  </footer>
+
+</div>
+
+<script>
+  // 스크롤 Fade-in + Slide-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.card').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.06}s`;
+    observer.observe(el);
+  });
+
+  // 전화번호 복사
+  function copyNumber(btn, number) {
+    const original = btn.innerHTML;
+    const done = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+    const finish = () => {
+      btn.innerHTML = done;
+      setTimeout(() => { btn.innerHTML = original; }, 1200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(number).then(finish).catch(finish);
+    } else {
+      const temp = document.createElement('textarea');
+      temp.value = number;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      finish();
+    }
+  }
+</script>
+
+</body>
+</html>
