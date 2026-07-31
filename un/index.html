@@ -403,6 +403,52 @@
 
     .flow-text .arrow { color: var(--red); font-weight: 700; margin: 0 2px; }
 
+    /* ── 반환 절차 스텝 ── */
+    .steps {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .step-box {
+      flex: 1;
+      background: var(--red-soft);
+      border: 1px solid var(--red-border);
+      border-radius: 10px;
+      padding: 8px 4px;
+      text-align: center;
+    }
+
+    .step-box.final {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .step-box .step-num {
+      font-size: 9px;
+      font-weight: 700;
+      color: rgba(255,56,92,0.6);
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .step-box.final .step-num { color: rgba(255,255,255,0.7); }
+
+    .step-box .step-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--red);
+      line-height: 1.3;
+    }
+
+    .step-box.final .step-label { color: #fff; }
+
+    .step-arrow {
+      color: var(--text-3);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
     /* ── 구분선 ── */
     .section-divider {
       height: 1px;
@@ -501,7 +547,7 @@
             <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
             <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
           </svg>
-          <div class="alert-text">이사종료 시간 <strong>미전달 또는 지연전달 시</strong> 당일 방문이 어려울 수 있으며, 룸체크가 지연되어 보증금 반환이 늦어질 수 있습니다.</div>
+          <div class="alert-text"><strong>미전달 또는 지연 전달 시</strong> 당일 방문이 어려울 수 있으며, 룸체크가 지연되어 <strong>보증금 반환이 늦어질 수 있습니다.</strong></div>
         </div>
 
       </div>
@@ -582,11 +628,12 @@
           <li>싱크대, 세면대, 욕조, 변기 등 배수 막힘 여부</li>
         </ul>
 
-        <div class="alert alert-info">
+        <div class="alert alert-warning">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
           </svg>
-          <div class="alert-text">사용상 과실로 인한 수리 및 원상복구 비용은 청구될 수 있습니다. 비용이 크게 발생할 수 있으니 <strong>사전 조치</strong>를 권장드립니다.</div>
+          <div class="alert-text"><strong>사용상 과실로 인한 수리 및 원상복구 비용은 청구될 수 있습니다.</strong> 비용이 크게 발생할 수 있으니 사전 조치를 권장드립니다.</div>
         </div>
 
       </div>
@@ -601,7 +648,30 @@
       <div class="card-body">
 
         <div class="sub-title">반환 절차</div>
-        <p class="flow-text">이삿짐 완전 퇴거 <span class="arrow">→</span> 룸체크 완료 <span class="arrow">→</span> 월세·관리비·공과금 정산 입금 확인 <span class="arrow">→</span> 보증금 반환</p>
+
+        <div class="steps">
+          <div class="step-box">
+            <div class="step-num">STEP 1</div>
+            <div class="step-label">이삿짐<br>완전 퇴거</div>
+          </div>
+          <span class="step-arrow">›</span>
+          <div class="step-box">
+            <div class="step-num">STEP 2</div>
+            <div class="step-label">룸체크<br>완료</div>
+          </div>
+          <span class="step-arrow">›</span>
+          <div class="step-box">
+            <div class="step-num">STEP 3</div>
+            <div class="step-label" style="font-size:10px;">월세·관리비·공과금<br>정산 확인</div>
+          </div>
+          <span class="step-arrow">›</span>
+          <div class="step-box final">
+            <div class="step-num">완료</div>
+            <div class="step-label">보증금<br>반환</div>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
 
         <div class="sub-title">반환 계좌 전달</div>
 
